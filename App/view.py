@@ -130,7 +130,7 @@ def optionNine(cont, destStation, searchMethod):
 
 
 def optionTen(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller searchPath
+    # TODO Lab 11, conectar con la funcion del controller searchPathTo
     path = None
     if path is not None:
         pass
@@ -189,7 +189,6 @@ def thread_cycle():
 
         else:
             sys.exit(0)
-    sys.exit(0)
 
 
 if __name__ == "__main__":
