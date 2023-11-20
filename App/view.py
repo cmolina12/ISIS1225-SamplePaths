@@ -56,7 +56,7 @@ searchMethod = None
 def printMenu():
     print("\n")
     print("*******************************************")
-    # TODO Lab 11, asegurarse de completar las opciones 4, 9 y 10
+    # TODO Lab 11, asegurarse de completar las opciones 5, 9 y 10
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de buses de singapur")
@@ -98,10 +98,10 @@ def optionFive(cont, initialStation, searchMethod):
     pass
 
 
-def optionSix(cont, destStation):
+def optionSix(cont, initialStation, destStation):
     haspath = controller.hasPath(cont, destStation)
-    print('Hay camino entre la estación base : ' +
-          'y la estación: ' + destStation + ': ')
+    print('Hay camino entre la estación base '+ initialStation +
+          ' y la estación: ' + destStation + '?: ')
     print(haspath)
 
 
@@ -144,10 +144,10 @@ Menu principal
 
 
 def thread_cycle():
+    initialStation  = None
     while True:
         printMenu()
         inputs = input('Seleccione una opción para continuar\n>')
-
         if int(inputs) == 1:
             print("\nInicializando....")
             # cont es el controlador que se usará de acá en adelante
@@ -170,7 +170,7 @@ def thread_cycle():
 
         elif int(inputs) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")
-            optionSix(cont, destStation)
+            optionSix(cont, initialStation, destStation)
 
         elif int(inputs) == 7:
             destStation = input("Estación destino (Ej: 15151-10): ")
