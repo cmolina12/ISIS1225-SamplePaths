@@ -29,7 +29,8 @@ from DISClib.ADT import map as m
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Graphs import scc
 from DISClib.Algorithms.Graphs import dijsktra as djk
-# TODO Lab 11, agregar importaciones dfs y bfs
+from DISClib.Algorithms.Graphs import dfs
+from DISClib.Algorithms.Graphs import bfs
 from DISClib.Utils import error as error
 assert config
 
@@ -53,12 +54,13 @@ def newAnalyzer():
            vertice determinado a todos los otros vértices del grafo
     """
     try:
-        # TODO Lab 11, agregar llave "search" para usar dfs y bfs
+       
         analyzer = {
             'stops': None,
             'connections': None,
             'components': None,
             'paths': None,
+            'search': None
         }
 
         analyzer['stops'] = m.newMap(numelements=14000,
@@ -215,12 +217,11 @@ def searchPaths(analyzer, initialStation, method):
     Returns:
         dict: devuelve el analyzer del modelo
     """
-    # TODO Lab 11, ejecutar DepthFirstSearch de dfs
+
     if method == "dfs":
-        pass
-    # TODO Lab 11, ejecutar BreadhtFisrtSearch de bfs
+        analyzer['search'] = dfs.DepthFirstSearch(analyzer['connections'], initialStation)
     elif method == "bfs":
-        pass
+        analyzer["search"] = bfs.BreadhtFisrtSearch(analyzer["connections"], initialStation)
     return analyzer
 
 
@@ -234,12 +235,12 @@ def hasSearchPath(analyzer, destStation, method):
         destStation (vertice): estacion de destino para el recorrido
         method (str, optional): algoritmo de busqueda. Por defecto es "dfs"
     """
-    # TODO Lab 11, ejecutar hasPathTo por dfs
+
     if method == "dfs":
-        return None
-    # TODO Lab 11, ejecutar hasPathTo por bfs
+        return dfs.hasPathTo(analyzer["search"], destStation)
+
     elif method == "bfs":
-        return None
+        return bfs.hasPathTo(analyzer["search"], destStation)
 
 
 def searchPathTo(analyzer, destStation, method):
@@ -256,12 +257,12 @@ def searchPathTo(analyzer, destStation, method):
         stack: devuele una pila con el camino encontrado en la busqueda.
     """
     path = None
-    # TODO Lab 11, ejecutar pathTo por dfs
+
     if method == "dfs":
-        pass
-    # TODO Lab 11, ejecutar pathTo por bfs
+        return dfs.pathTo(analyzer["search"], destStation)
+
     elif method == "bfs":
-        pass
+        return bfs.pathTo(analyzer["search"], destStation)
     return path
 
 

@@ -94,8 +94,9 @@ def optionFour(cont, initialStation):
 
 
 def optionFive(cont, initialStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller searchPaths
-    pass
+    print('Calculando costo de caminos')
+    controller.searchPaths(cont, initialStation, searchMethod)
+    
 
 
 def optionSix(cont, initialStation, destStation):
@@ -124,16 +125,25 @@ def optionEight(cont):
 
 
 def optionNine(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller hasSearchPath
-    haspath = None
-    print(haspath)
+
+    haspath = controller.searchPathTo(cont, destStation, searchMethod)
+    if haspath is not None:
+        print('Hay camino entre la estación base y la estación: ' +
+              destStation + '?: ')
+        print("Si existe un camino")
+    else:
+        print('No hay camino')
 
 
 def optionTen(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller searchPathTo
-    path = None
+
+    path = controller.searchPathTo(cont, destStation, searchMethod)
     if path is not None:
-        pass
+        pathlen = stack.size(path)
+        print('El camino es de longitud: ' + str(pathlen))
+        while (not stack.isEmpty(path)):
+            stop = stack.pop(path)
+            print(stop)
     else:
         print('No hay camino')
 
@@ -165,8 +175,10 @@ def thread_cycle():
             optionFour(cont, initialStation)
 
         elif int(inputs) == 5:
-            # TODO Lab 11, completar inputs opt 5, searchMethod, initialStation
-            pass
+            initialStation = input("Estación base (Ej: 15151-10): ")
+            searchMethod = input("Método de búsqueda (Ej: DFS o BFS): ")
+            optionFive(cont, initialStation, searchMethod)
+            
 
         elif int(inputs) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")
@@ -180,12 +192,13 @@ def thread_cycle():
             optionEight(cont)
 
         elif int(inputs) == 9:
-            # TODO Lab 11, completar inputs opt 9, destStation
-            pass
+            destStation = input("Estación destino (Ej: 15151-10): ")
+            optionNine(cont, destStation, searchMethod)
 
         elif int(inputs) == 10:
             # TODO Lab 11, completar inputs opt 10, destStation
-            pass
+            destStation = input("Estación destino (Ej: 15151-10): ")
+            optionTen(cont, destStation, searchMethod)
 
         else:
             sys.exit(0)
